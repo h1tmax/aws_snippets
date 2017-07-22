@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - "aws-test-key.yml"
+  roles:
+#   - ec2_gather_facts
+#   - ec2_start_instances
+#   - ec2_stop_instances
+   - ec2_create_sg
+#   - ec2_sg_gather_facts
+
+

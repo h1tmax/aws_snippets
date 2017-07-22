@@ -1,0 +1,12 @@
+---
+- name: Search ec2 sg
+  ec2_group_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    profile: "{{ aws_default_profile }}"
+    region: "{{ aws_default_region }}"
+    filters:
+      "tag:Name": "devops_ed_sg"
+  register: sg_facts
+
+- debug: var=sg_facts

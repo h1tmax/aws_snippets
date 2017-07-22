@@ -1,0 +1,20 @@
+---
+- name: Search ec2
+  ec2_remote_facts:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    profile: "{{ aws_default_profile }}"
+    region: "{{ aws_default_region }}"
+#    filters:
+#      "tag:Name": "awstest"
+  register: ec2_facts
+
+- name: Stop ec2 instance
+  ec2:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    region: "{{ item.region }}"
+    instance_ids: "{{ item.id }}"
+    state: stopped
+    wait: True
+  with_items: "{{ ec2_facts.instances }}"
